@@ -10,9 +10,47 @@ import {
   password,
   editProdCont,
   addCart,
+  shoppingCart,
 } from "./constants.js";
-
 import { saveToken, saveUser } from "./localStorage.js";
+
+// Adds a listener to all add to cart buttons on the products page
+export const addToCart = () => {
+  const cartBtns = document.querySelectorAll(".product-details_addcart");
+
+  for (const btn of cartBtns) {
+    btn.addEventListener("click", () => {
+      getForCart(baseUrl + "/products/" + event.target.id);
+    });
+  }
+};
+
+// SHOPPING CART: Array for temporarily holding object for localStorage.
+let cart = [];
+
+// SHOPPING CART: Checks for items in localStorage and makes sure the cart variable and localStorage match.
+export const checkArray = () => {
+  const cartArray = JSON.parse(localStorage.getItem("cart"));
+  if (!cartArray) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  } else if (cartArray) {
+    cart = JSON.parse(localStorage.getItem("cart"));
+  }
+};
+checkArray();
+
+// SHOPPING CART: Fetches a product using the ID, then adds/removes it from array.
+const getForCart = async (url) => {
+  const response = await fetch(url);
+  const json = await response.json();
+  if (cart.indexOfObject("id", parseInt(json.id)) === -1) {
+    cart.push(json);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  } else {
+    cart.splice(cart[cart.indexOfObject("id", parseInt(json.id))], 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+};
 
 // Changes color for the navigation when it is past the hero image so it's not white text on white bg.
 export const navigationStyler = () => {
@@ -42,17 +80,21 @@ export const getData = async (url) => {
     printData(json);
   } else if (location.pathname == "/productedit.html") {
     printData(json);
+  } else if (location.pathname == "/shoppingcart.html") {
+    printData(json);
   }
 };
 
 // Reusable function that prints HTML based on the data received from getData() and current path.
-const printData = (data) => {
+export const printData = (data) => {
+  // INDEX/HOME PAGE
   if (location.pathname == "/" || location.pathname == "/index.html") {
     heroCont.innerHTML = `
       <img class="c-hero__image" src="${baseUrl + data.hero_banner.url}" alt="${
       data.hero_banner_alt_text
     }" />
   `;
+    // PRODUCTS PAGE
   } else if (location.pathname == "/products.html") {
     for (const product of data) {
       productsCont.innerHTML += `
@@ -74,6 +116,7 @@ const printData = (data) => {
     `;
     }
     addToCart();
+    // DETAIL PAGE
   } else if (location.pathname == "/product.html") {
     detailsCont.innerHTML = `
       <div class="details-image">
@@ -83,6 +126,7 @@ const printData = (data) => {
       <p>${data.price}kr</p>
       <p>${data.description}</p>
   `;
+    // PRODUCT ADMINISTRATION/UPDATING
   } else if (location.pathname == "/productedit.html") {
     for (const product of data) {
       editProdCont.innerHTML += `
@@ -94,96 +138,27 @@ const printData = (data) => {
         </a>
     `;
     }
+    // SHOPPING CART - Prints based on data from localStorage
+  } else if (location.pathname == "/shoppingcart.html") {
+    let cartArr = JSON.parse(localStorage.getItem("cart"));
+    for (const item of cartArr) {
+      shoppingCart.innerHTML += `
+        <div class="shoppingcart-item">
+            <div class="shoppingcart-item_image">
+                <img src="${baseUrl + item.image.url}">
+            </div>
+            <a href="../product.html?id=${item.id}" >${item.title}</a>
+            <p>${item.price}</p>
+        </div>
+  `;
+    }
   }
 };
 
-// Adds a listener to all add to cart buttons
-const addToCart = () => {
-  const cartBtns = document.querySelectorAll(".product-details_addcart");
-
-  for (const btn of cartBtns) {
-    btn.addEventListener("click", () => {
-      getForCart(baseUrl + "/products/" + event.target.id);
-    });
-  }
-};
 // Used for searching the array for objects with an identical value.
 Array.prototype.indexOfObject = function (property, value) {
   for (let i = 0; i < this.length; i++) {
     if (this[i][property] === value) return i;
   }
   return -1;
-};
-
-// Array for temporarily holding object for localStorage.
-let cart = [];
-
-// Checks for items in localStorage an makes sure the cart variable and localStorage match.
-const cartArray = JSON.parse(localStorage.getItem("cart"));
-if (!cartArray) {
-  localStorage.setItem("cart", JSON.stringify(cart));
-} else if (cartArray) {
-  cart = JSON.parse(localStorage.getItem("cart"));
-}
-
-// if (!cartArray) {
-//   localStorage.setItem("cart", JSON.stringify(cart));
-// }
-
-// Fetches a product using the ID, then adds/removes it from array.
-const getForCart = async (url) => {
-  const response = await fetch(url);
-  const json = await response.json();
-  if (cart.indexOfObject("id", parseInt(json.id)) === -1) {
-    cart.push(json);
-    localStorage.setItem("cart", JSON.stringify(cart));
-  } else {
-    cart.splice(cart[cart.indexOfObject("id", parseInt(json.id))], 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
-
-  // cart = JSON.parse(localStorage.getItem("cart"));
-  // console.log(cart);
-};
-
-// Validates e-mail input for the log-in/admin page, and returns an error message if incorrect.
-
-export const emailCheck = (email) => {
-  return emailRegEx.test(email);
-};
-
-// Submits the login form
-export const formSubmit = (event) => {
-  event.preventDefault();
-
-  logIn(eMail.value, password.value);
-};
-
-// Sends a request to the API with credentials from the login form
-export const logIn = async (username, password) => {
-  const url = baseUrl + "/auth/local";
-
-  const data = JSON.stringify({ identifier: username, password: password });
-
-  const options = {
-    method: "POST",
-    body: data,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  try {
-    const response = await fetch(url, options);
-    const json = await response.json();
-
-    if (json.user) {
-      saveToken(json.jwt);
-      saveUser(json.user);
-
-      location.href = "/productedit.html";
-    }
-  } catch (error) {
-    console.log(error);
-  }
 };

@@ -8,7 +8,7 @@ import {
   editProdForm,
   editProdImage,
 } from "../constants.js";
-import { formSubmit } from "../utilFunctions.js";
+// import { formSubmit } from "../utilFunctions.js";
 import { getToken } from "../localStorage.js";
 const searchParam = new URLSearchParams(window.location.search);
 const id = searchParam.get("id");
@@ -17,7 +17,6 @@ const productUrl = baseUrl + "/products/" + id;
 const getProduct = async (url) => {
   const response = await fetch(url);
   const json = await response.json();
-  console.log(json);
   editProdName.value = json.title;
   editProdId.value = json.id;
   editProdDesc.value = json.description;
@@ -36,7 +35,6 @@ const putProduct = async (name, price, description, id, featured) => {
     featured: featured,
     id: id,
   });
-  console.log(data);
   const token = getToken();
   const options = {
     method: "PUT",
@@ -48,7 +46,6 @@ const putProduct = async (name, price, description, id, featured) => {
   };
   const response = await fetch(productUrl, options);
   const json = await response.json();
-  console.log(json);
 };
 
 const submitEditForm = () => {
@@ -60,10 +57,8 @@ const submitEditForm = () => {
 
   if (editProdFeatured.checked === true) {
     featured = true;
-    console.log(featured);
   } else {
     featured = false;
-    console.log(featured);
   }
 
   if (

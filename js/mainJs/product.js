@@ -3,7 +3,6 @@ import { getData } from "../utilFunctions.js";
 
 const searchParam = new URLSearchParams(window.location.search);
 const id = searchParam.get("id");
-console.log(id);
 
 // console.log(baseUrl + apiUrl + "/" + id);
 getData(baseUrl + apiUrl + "/" + id);
