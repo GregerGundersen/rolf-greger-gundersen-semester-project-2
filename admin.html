@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style.css" rel="stylesheet" />
+    <title>Semester Project 2 | Admin</title>
+  </head>
+  <body>
+    <header class="c-menu">
+      <div class="c-menu__left">
+        <p>LOGO HERE</p>
+      </div>
+      <nav class="c-menu-navigation">
+        <ul class="c-menu-navigation__list">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./products.html">Products</a></li>
+          <li><a href="./shoppingcart.html">Cart</a></li>
+          <li><a href="./admin.html">Log In</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="login">
+        <form id="login-form">
+          <div>
+            <label for="login-form_email">E-Mail</label>
+            <input
+              id="login-form_email"
+              name="email"
+              type="text"
+              placeholder="E-Mail"
+            />
+          </div>
+          <div>
+            <label for="login-form_password">Password</label>
+            <input
+              type="password"
+              id="login-form_password"
+              name="password"
+              placeholder="Password"
+            />
+          </div>
+          <button>Submit</button>
+        </form>
+      </div>
+    </main>
+    <script type="module" src="js/mainJs/admin.js"></script>
+  </body>
+</html>

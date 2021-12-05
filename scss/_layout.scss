@@ -1,10 +1,11 @@
 .c-menu {
   display: flex;
   justify-content: space-between;
-  margin-right: 1rem;
+  // margin-right: 1rem;
   position: sticky;
   top: 0;
   right: 0;
+  z-index: 99;
 }
 
 .c-menu-navigation__list {
@@ -13,6 +14,40 @@
 }
 
 .c-hero {
+  position: absolute;
+  top: 0;
+  right: 0;
   height: 100vh;
   width: 100vw;
+}
+
+.c-hero__image {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+// Main section
+
+.index-main {
+  position: absolute;
+  top: 110vh;
+  margin: 0 8.33%;
+}
+
+// Products
+.prod-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  margin: 0 8.33%;
+}
+
+.editprod-list {
+  margin: 0 8.33%;
+}
+
+.editprod-list_products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }

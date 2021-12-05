@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semester Project 2 | Edit</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="c-menu">
+      <div class="c-menu__left">
+        <p>LOGO HERE</p>
+      </div>
+      <nav class="c-menu-navigation">
+        <ul class="c-menu-navigation__list">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./products.html">Products</a></li>
+          <li><a href="./shoppingcart.html">Cart</a></li>
+          <li><a href="./admin.html">Log In</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="edit-form">
+        <form id="edit-form_form" action="">
+          <div>
+            <label for="product-name">Name</label>
+            <input type="text" id="product-name" />
+          </div>
+          <div>
+            <label for="product-id">ID</label>
+            <input type="text" id="product-id" />
+          </div>
+          <div>
+            <label for="product-description">Description</label>
+            <input type="text" id="product-description" />
+          </div>
+          <div>
+            <label for="product-price">Price</label>
+            <input type="text" id="product-price" />
+          </div>
+          <div>
+            <label for="product-image">Image URL</label>
+            <input type="text" id="product-image" />
+          </div>
+          <div>
+            <label for="product-featured">Featured</label>
+            <input type="checkbox" id="product-featured" />
+          </div>
+          <div>
+            <button>Update</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <script type="module" src="./js/mainJs/editForm.js"></script>
+  </body>
+</html>

@@ -1,2 +1,21 @@
-export const baseUrl = "http://localhost:1337/";
-export const apiUrl = "products";
+export const baseUrl = "http://localhost:1337";
+export const apiUrl = "/products";
+export const heroCont = document.querySelector(".c-hero");
+export const navCont = document.querySelectorAll(".c-menu-navigation__list a");
+export const productsCont = document.querySelector(".prod-list");
+export const detailsCont = document.querySelector(".details");
+export const emailRegEx =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+export const eMail = document.querySelector("#login-form_email");
+export const password = document.querySelector("#login-form_password");
+export const logInForm = document.querySelector("#login-form");
+export const editProdCont = document.querySelector(".editprod-list");
+export const editProdName = document.querySelector("#product-name");
+export const editProdDesc = document.querySelector("#product-description");
+export const editProdPrice = document.querySelector("#product-price");
+export const editProdFeatured = document.querySelector("#product-featured");
+export const editProdId = document.querySelector("#product-id");
+export const editProdForm = document.querySelector("#edit-form_form");
+export const editProdImage = document.querySelector("#product-image");
+export const addCart = document.querySelector(".product-details_addcart");
+export const shoppingCart = document.querySelector(".shoppingcart");
