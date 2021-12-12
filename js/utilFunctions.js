@@ -104,8 +104,8 @@ export const printData = (data) => {
             <img src="${baseUrl + product.image.url}" alt="${product.title}" />
           </div>
           <div class="product-details">
-            <h2>${product.title}</h2>
-            <p>${product.price}kr</p>
+            <h2 class="product-details_title">${product.title}</h2>
+            <p class="product-details_price">${product.price} kr</p>
           </div>
           </a>
           <div id="${
@@ -122,9 +122,11 @@ export const printData = (data) => {
       <div class="details-image">
         <img src="${baseUrl + data.image.url}" />
       </div>
-      <h2>${data.title}</h2>
-      <p>${data.price}kr</p>
-      <p>${data.description}</p>
+      <div class="details-info">
+        <h2 class="details-info_title">${data.title}</h2>
+        <p class="details-info_price">${data.price} kr</p>
+        <p class="details-info_description">${data.description}</p>
+      </div>
   `;
     // PRODUCT ADMINISTRATION/UPDATING
   } else if (location.pathname == "/productedit.html") {
@@ -133,7 +135,7 @@ export const printData = (data) => {
         <a href="../editform.html?id=${product.id}" class="editprod-list_products">
           <p>${product.id}</p>
           <p>${product.title}</p>
-          <p>${product.price}</p>
+          <p>${product.price} kr</p>
           <i class="far fa-trash-alt"></i>
         </a>
     `;

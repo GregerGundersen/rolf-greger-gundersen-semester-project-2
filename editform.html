@@ -10,7 +10,7 @@
   <body>
     <header class="c-menu">
       <div class="c-menu__left">
-        <p>LOGO HERE</p>
+        <img src="./media/Logo.svg" alt="Logo with title" />
       </div>
       <nav class="c-menu-navigation">
         <ul class="c-menu-navigation__list">
@@ -24,31 +24,43 @@
     <main>
       <div class="edit-form">
         <form id="edit-form_form" action="">
-          <div>
-            <label for="product-name">Name</label>
-            <input type="text" id="product-name" />
+          <div class="edit-form_container">
+            <label class="edit-form_label" for="product-name">Name</label>
+            <input class="edit-form_input" type="text" id="product-name" />
           </div>
-          <div>
-            <label for="product-id">ID</label>
-            <input type="text" id="product-id" />
+          <div class="edit-form_container">
+            <label class="edit-form_label" for="product-id">ID</label>
+            <input class="edit-form_input" type="text" id="product-id" />
           </div>
-          <div>
-            <label for="product-description">Description</label>
-            <input type="text" id="product-description" />
+          <div class="edit-form_container">
+            <label class="edit-form_label" for="product-description"
+              >Description</label
+            >
+            <input
+              class="edit-form_input"
+              type="text"
+              id="product-description"
+            />
           </div>
-          <div>
-            <label for="product-price">Price</label>
-            <input type="text" id="product-price" />
+          <div class="edit-form_container">
+            <label class="edit-form_label" for="product-price">Price</label>
+            <input class="edit-form_input" type="text" id="product-price" />
           </div>
-          <div>
-            <label for="product-image">Image URL</label>
-            <input type="text" id="product-image" />
+          <div class="edit-form_container">
+            <label class="edit-form_label" for="product-image">Image URL</label>
+            <input class="edit-form_input" type="text" id="product-image" />
           </div>
-          <div>
-            <label for="product-featured">Featured</label>
-            <input type="checkbox" id="product-featured" />
+          <div class="edit-form_container">
+            <label class="edit-form_label" for="product-featured"
+              >Featured</label
+            >
+            <input
+              class="edit-form_input"
+              type="checkbox"
+              id="product-featured"
+            />
           </div>
-          <div>
+          <div class="edit-form_container">
             <button>Update</button>
           </div>
         </form>

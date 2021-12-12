@@ -10,7 +10,7 @@
   <body>
     <header class="c-menu">
       <div class="c-menu__left">
-        <p>LOGO HERE</p>
+        <img src="./media/Logo.svg" alt="Logo with title" />
       </div>
       <nav class="c-menu-navigation">
         <ul class="c-menu-navigation__list">
@@ -24,8 +24,10 @@
     <main>
       <div class="login">
         <form id="login-form">
-          <div>
-            <label for="login-form_email">E-Mail</label>
+          <div class="login-form_container">
+            <label class="login-form_label" for="login-form_email"
+              >E-Mail</label
+            >
             <input
               id="login-form_email"
               name="email"
@@ -33,8 +35,10 @@
               placeholder="E-Mail"
             />
           </div>
-          <div>
-            <label for="login-form_password">Password</label>
+          <div class="login-form_container">
+            <label class="login-form_label" for="login-form_password"
+              >Password</label
+            >
             <input
               type="password"
               id="login-form_password"
@@ -44,6 +48,16 @@
           </div>
           <button>Submit</button>
         </form>
+        <div class="login_info">
+          <h2 class="login-info_title">Log in</h2>
+          <p class="login-info_performtask">
+            Log in as an admin to perform tasks such as:
+          </p>
+          <ul class="login-info_list">
+            <li>Update, delete or create new products</li>
+            <li>Manage your shopping cart</li>
+          </ul>
+        </div>
       </div>
     </main>
     <script type="module" src="js/mainJs/admin.js"></script>

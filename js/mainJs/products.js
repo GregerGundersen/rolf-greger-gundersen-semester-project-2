@@ -25,8 +25,8 @@ const getFiltered = async (url, parameter) => {
             <img src="${baseUrl + product.image.url}" alt="${product.title}" />
           </div>
           <div class="product-details">
-            <h2>${product.title}</h2>
-            <p>${product.price}kr</p>
+            <h2 class="product-details_title">${product.title}</h2>
+            <p class="product-details_price">${product.price} kr</p>
           </div>
           </a>
           <div id="${

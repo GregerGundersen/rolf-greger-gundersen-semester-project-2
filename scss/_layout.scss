@@ -35,7 +35,20 @@
   margin: 0 8.33%;
 }
 
+.recommend-prod {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+}
+
 // Products
+.prod-list-filters {
+  margin: 0 8.33%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .prod-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -43,11 +56,52 @@
   margin: 0 8.33%;
 }
 
-.editprod-list {
+.editprod-list,
+.editprod-title {
   margin: 0 8.33%;
+}
+
+.editprod-list_tableinfo {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid #e74c3c;
 }
 
 .editprod-list_products {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+}
+
+// Details
+.details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+// Log-In
+.login {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 800px;
+  height: 300px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+// Update products form
+.edit-form {
+  width: 800px;
+  // height: 00px;
+  margin: auto;
+  margin-top: auto;
+  margin-top: 40px;
+}
+
+// Shopping cart
+.shoppingcart {
+  width: 60%;
+  margin-left: 8.33%;
+  margin-top: 8.33%;
 }
