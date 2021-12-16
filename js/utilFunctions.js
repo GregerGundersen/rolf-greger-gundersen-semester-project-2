@@ -12,7 +12,42 @@ import {
   addCart,
   shoppingCart,
 } from "./constants.js";
-import { saveToken, saveUser } from "./localStorage.js";
+import { getToken, getUsername, saveToken, saveUser } from "./localStorage.js";
+
+// Check for log-in
+export const loggedIn = () => {
+  const logInNav = document.querySelector("#logInNav");
+  const userName = getUsername();
+  if (userName && location.href == "http://127.0.0.1:5500/productedit.html") {
+    logInNav.innerHTML = `<a id="activelink" href="../productedit.html" >${userName}</a>`;
+  } else if (userName) {
+    logInNav.innerHTML = `<a href="../productedit.html" >${userName}</a>`;
+  }
+  return;
+};
+
+// Mobile navigation
+export const hbIco = document.querySelector(".fa-bars");
+export const navigation = document.querySelector(".c-menu-navigation");
+export const navList = document.querySelector(".c-menu-navigation__list");
+export const navElems = document.querySelectorAll(
+  ".c-menu-navigation__list li"
+);
+export const mobileNavigation = () => {
+  if (navList.style.display == "" || navList.style.display == "none") {
+    navList.style.display = "block";
+    navList.style.marginTop = "0";
+    navigation.style.gridColumn = "1/ span 2";
+    for (const elem of navElems) {
+      elem.style.textAlign = "center";
+      elem.style.width = "100%";
+      elem.style.margin = "20px 0";
+    }
+  } else if (navList.style.display == "block") {
+    navList.style.display = "none";
+  }
+};
+hbIco.addEventListener("click", mobileNavigation);
 
 // Adds a listener to all add to cart buttons on the products page
 export const addToCart = () => {
@@ -21,6 +56,29 @@ export const addToCart = () => {
   for (const btn of cartBtns) {
     btn.addEventListener("click", () => {
       getForCart(baseUrl + "/products/" + event.target.id);
+    });
+  }
+};
+
+// Adds a listener to the delete button on the manage products page
+const deleteListener = () => {
+  const deleteBtns = document.querySelectorAll(".fa-trash-alt");
+  console.log(deleteBtns);
+
+  for (const btn of deleteBtns) {
+    btn.addEventListener("click", async () => {
+      const url = baseUrl + "/products/" + event.target.id;
+      const token = getToken();
+      const options = {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await fetch(url, options);
+      const json = await response.json();
+      alert("Product deleted");
+      location.reload();
     });
   }
 };
@@ -49,20 +107,6 @@ const getForCart = async (url) => {
   } else {
     cart.splice(cart[cart.indexOfObject("id", parseInt(json.id))], 1);
     localStorage.setItem("cart", JSON.stringify(cart));
-  }
-};
-
-// Changes color for the navigation when it is past the hero image so it's not white text on white bg.
-export const navigationStyler = () => {
-  const rect = heroCont.getBoundingClientRect();
-  if (rect.bottom < 40) {
-    for (const elem of navCont) {
-      elem.style.color = "black";
-    }
-  } else if (rect.bottom > 40) {
-    for (const elem of navCont) {
-      elem.style.color = "white";
-    }
   }
 };
 
@@ -98,7 +142,7 @@ export const printData = (data) => {
   } else if (location.pathname == "/products.html") {
     for (const product of data) {
       productsCont.innerHTML += `
-        <div>
+        <div class="products-item_container">
           <a href="../product.html?id=${product.id}" class="product">
           <div class="product-img">
             <img src="${baseUrl + product.image.url}" alt="${product.title}" />
@@ -126,34 +170,48 @@ export const printData = (data) => {
         <h2 class="details-info_title">${data.title}</h2>
         <p class="details-info_price">${data.price} kr</p>
         <p class="details-info_description">${data.description}</p>
+                  <div id="${
+                    data.id
+                  }" class="product-details_addcart">Toggle cart<i class="fas fa-cart-plus"></i>
       </div>
   `;
+    addToCart();
     // PRODUCT ADMINISTRATION/UPDATING
   } else if (location.pathname == "/productedit.html") {
     for (const product of data) {
       editProdCont.innerHTML += `
+      <div class="editprod-list_container">
         <a href="../editform.html?id=${product.id}" class="editprod-list_products">
           <p>${product.id}</p>
           <p>${product.title}</p>
           <p>${product.price} kr</p>
-          <i class="far fa-trash-alt"></i>
-        </a>
+             </a>
+          <i id="${product.id}" class="far fa-trash-alt"></i>
+          </div>
+     
     `;
     }
+    deleteListener();
     // SHOPPING CART - Prints based on data from localStorage
   } else if (location.pathname == "/shoppingcart.html") {
     let cartArr = JSON.parse(localStorage.getItem("cart"));
+    let totalsum = 0;
     for (const item of cartArr) {
+      totalsum += item.price;
       shoppingCart.innerHTML += `
         <div class="shoppingcart-item">
             <div class="shoppingcart-item_image">
                 <img src="${baseUrl + item.image.url}">
             </div>
             <a href="../product.html?id=${item.id}" >${item.title}</a>
-            <p>${item.price}</p>
+            <p>${item.price} kr</p>
         </div>
   `;
     }
+    shoppingCart.innerHTML += `
+      <p class="shoppingcart-sum">Total sum: ${totalsum}</p>
+      <button class="shoppingcart-checkout">Checkout</button>
+    `;
   }
 };
 

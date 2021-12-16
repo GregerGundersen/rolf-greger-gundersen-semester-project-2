@@ -1,6 +1,18 @@
-import { getData, printData, addToCart, checkArray } from "../utilFunctions.js";
+import {
+  getData,
+  printData,
+  addToCart,
+  checkArray,
+  loggedIn,
+  hbIco,
+  mobileNavigation,
+} from "../utilFunctions.js";
 import { apiUrl, baseUrl, productsCont } from "../constants.js";
 const nameFilter = document.querySelector("#prod-list-filters_name");
+
+console.log(hbIco);
+
+loggedIn();
 
 // Gets the products array and prints the HTML
 getData(baseUrl + apiUrl);

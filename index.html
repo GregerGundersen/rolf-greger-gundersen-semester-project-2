@@ -6,18 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Semester Project 2</title>
     <link href="style.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/8959b83462.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header class="c-menu">
       <div class="c-menu__left">
-        <img src="./media/Logo.svg" alt="Logo with title" />
+        <a href="./index.html">
+          <img src="./media/image.png" alt="Logo with title" />
+        </a>
       </div>
+      <i class="fas fa-bars"></i>
       <nav class="c-menu-navigation">
         <ul class="c-menu-navigation__list">
-          <li><a href="./index.html">Home</a></li>
+          <li><a id="activelink" href="./index.html">Home</a></li>
           <li><a href="./products.html">Products</a></li>
           <li><a href="./shoppingcart.html">Cart</a></li>
-          <li><a href="./admin.html">Log In</a></li>
+          <li id="logInNav"><a href="./admin.html">Log In</a></li>
         </ul>
       </nav>
     </header>

@@ -1,5 +1,8 @@
 import { eMail, password, logInForm, baseUrl } from "../constants.js";
 import { saveToken, saveUser } from "../localStorage.js";
+import { loggedIn, hbIco, mobileNavigation } from "../utilFunctions.js";
+
+loggedIn();
 
 // Submits the login form
 const formSubmit = (event) => {

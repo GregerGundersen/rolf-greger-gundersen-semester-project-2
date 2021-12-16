@@ -1,9 +1,15 @@
 import { baseUrl, apiUrl, heroCont } from "../constants.js";
-import { getData, navigationStyler, addToCart } from "../utilFunctions.js";
+import {
+  getData,
+  addToCart,
+  loggedIn,
+  hbIco,
+  mobileNavigation,
+} from "../utilFunctions.js";
 
-// getHeader(baseUrl + "/home");
+loggedIn();
+
 getData(baseUrl + "/home");
-document.addEventListener("scroll", navigationStyler);
 
 const featuredProducts = async () => {
   const featuredProds = document.querySelector(".recommend-prod");
@@ -12,9 +18,8 @@ const featuredProducts = async () => {
 
   for (const product of json) {
     if (product.featured === true) {
-      console.log(product.title);
       featuredProds.innerHTML += `
-          <div>
+          <div class="featproducts-item_container">
             <a href="../product.html?id=${product.id}" class="product">
             <div class="product-img">
               <img src="${baseUrl + product.image.url}" alt="${

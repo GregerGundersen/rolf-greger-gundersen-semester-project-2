@@ -8,9 +8,8 @@ import {
   editProdForm,
   editProdImage,
 } from "../constants.js";
-import { getToken } from "../localStorage.js";
-import { loggedIn, hbIco, mobileNavigation } from "../utilFunctions.js";
-import { getUsername } from "../localStorage.js";
+import { getToken, getUsername } from "../localStorage.js";
+import { loggedIn } from "../utilFunctions.js";
 
 const reDirect = () => {
   const userName = getUsername();
@@ -22,24 +21,10 @@ const reDirect = () => {
 reDirect();
 
 loggedIn();
-const searchParam = new URLSearchParams(window.location.search);
-const id = searchParam.get("id");
-const productUrl = baseUrl + "/products/" + id;
 
-const getProduct = async (url) => {
-  const response = await fetch(url);
-  const json = await response.json();
-  editProdName.value = json.title;
-  editProdId.value = json.id;
-  editProdDesc.value = json.description;
-  editProdPrice.value = json.price;
-  editProdImage.value = json.image.url;
-  editProdFeatured.checked = json.featured;
-};
+const productUrl = baseUrl + "/products/";
 
-getProduct(productUrl);
-
-export const putProduct = async (name, price, description, id, featured) => {
+const postProduct = async (name, price, description, id, featured) => {
   const data = JSON.stringify({
     title: name,
     price: price,
@@ -49,7 +34,7 @@ export const putProduct = async (name, price, description, id, featured) => {
   });
   const token = getToken();
   const options = {
-    method: "PUT",
+    method: "POST",
     body: data,
     headers: {
       "Content-Type": "application/json",
@@ -58,9 +43,12 @@ export const putProduct = async (name, price, description, id, featured) => {
   };
   const response = await fetch(productUrl, options);
   const json = await response.json();
+  console.log(json);
+  alert("Product created");
+  location.href = "../../productedit.html";
 };
 
-const submitEditForm = () => {
+const submitCreateForm = () => {
   event.preventDefault();
   let featured;
   const name = editProdName.value.trim();
@@ -81,7 +69,6 @@ const submitEditForm = () => {
   ) {
     return alert("Invalid values");
   }
-  putProduct(name, editProdPrice.value, description, id, featured);
+  postProduct(name, editProdPrice.value, description, id, featured);
 };
-
-editProdForm.addEventListener("submit", submitEditForm);
+editProdForm.addEventListener("submit", submitCreateForm);

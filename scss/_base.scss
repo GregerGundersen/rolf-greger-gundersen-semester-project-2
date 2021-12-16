@@ -2,7 +2,10 @@ body {
   margin: 0;
   background-color: #f9f9f9;
   box-sizing: border-box;
-  height: 300vh;
+}
+
+#activelink {
+  text-decoration: underline #e74c3c;
 }
 
 @font-face {
