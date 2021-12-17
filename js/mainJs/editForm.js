@@ -39,13 +39,14 @@ const getProduct = async (url) => {
 
 getProduct(productUrl);
 
-export const putProduct = async (name, price, description, id, featured) => {
+const putProduct = async (name, price, description, id, featured, url) => {
   const data = JSON.stringify({
     title: name,
     price: price,
     description: description,
     featured: featured,
     id: id,
+    image_url: url,
   });
   const token = getToken();
   const options = {
@@ -58,6 +59,8 @@ export const putProduct = async (name, price, description, id, featured) => {
   };
   const response = await fetch(productUrl, options);
   const json = await response.json();
+  console.log(response);
+  console.log(json);
 };
 
 const submitEditForm = () => {
@@ -66,6 +69,7 @@ const submitEditForm = () => {
   const name = editProdName.value.trim();
   const description = editProdDesc.value.trim();
   const id = parseInt(editProdId.value);
+  const url = editProdImage.value.trim();
 
   if (editProdFeatured.checked === true) {
     featured = true;
@@ -81,7 +85,9 @@ const submitEditForm = () => {
   ) {
     return alert("Invalid values");
   }
-  putProduct(name, editProdPrice.value, description, id, featured);
+  putProduct(name, editProdPrice.value, description, id, featured, url);
+  alert("Success");
+  location.href = "../../productedit.html";
 };
 
 editProdForm.addEventListener("submit", submitEditForm);

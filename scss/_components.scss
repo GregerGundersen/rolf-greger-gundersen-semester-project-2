@@ -203,6 +203,7 @@
 .fa-trash-alt {
   margin-top: auto;
   margin-bottom: auto;
+  cursor: pointer;
 }
 
 // Log-In
@@ -325,5 +326,24 @@
 
   img {
     width: 100%;
+  }
+}
+
+footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  background-color: rgba(27, 26, 26, 0.95);
+  margin-top: 40px;
+  color: white;
+
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
   }
 }

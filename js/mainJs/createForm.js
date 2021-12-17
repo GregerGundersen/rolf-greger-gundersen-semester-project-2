@@ -24,6 +24,7 @@ loggedIn();
 
 const productUrl = baseUrl + "/products/";
 
+//Updates values
 const postProduct = async (name, price, description, id, featured) => {
   const data = JSON.stringify({
     title: name,
@@ -69,6 +70,7 @@ const submitCreateForm = () => {
   ) {
     return alert("Invalid values");
   }
+
   postProduct(name, editProdPrice.value, description, id, featured);
 };
 editProdForm.addEventListener("submit", submitCreateForm);

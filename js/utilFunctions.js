@@ -63,7 +63,6 @@ export const addToCart = () => {
 // Adds a listener to the delete button on the manage products page
 const deleteListener = () => {
   const deleteBtns = document.querySelectorAll(".fa-trash-alt");
-  console.log(deleteBtns);
 
   for (const btn of deleteBtns) {
     btn.addEventListener("click", async () => {
@@ -137,6 +136,7 @@ export const printData = (data) => {
       <img class="c-hero__image" src="${baseUrl + data.hero_banner.url}" alt="${
       data.hero_banner_alt_text
     }" />
+    <a href="../products.html" class="c-hero__image_text">Buy now</a>
   `;
     // PRODUCTS PAGE
   } else if (location.pathname == "/products.html") {

@@ -235,6 +235,7 @@ a {
 .fa-trash-alt {
   margin-top: auto;
   margin-bottom: auto;
+  cursor: pointer;
 }
 
 .login {
@@ -342,6 +343,23 @@ a {
   width: 100%;
 }
 
+footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  background-color: rgba(27, 26, 26, 0.95);
+  margin-top: 40px;
+  color: white;
+}
+footer .footer-contact {
+  display: flex;
+  flex-direction: column;
+}
+footer .footer-contact a {
+  color: white;
+  text-decoration: none;
+}
+
 .c-menu {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -374,6 +392,7 @@ a {
 .c-hero {
   height: 100vh;
   max-width: 100vw;
+  position: relative;
 }
 
 .c-hero__image {
@@ -382,6 +401,31 @@ a {
   object-fit: cover;
 }
 
+.c-hero__image_text {
+  position: absolute;
+  color: white;
+  font-family: "PT Sans", "sans-serif";
+  font-size: 4rem;
+  border: 5px solid white;
+  padding: 1rem;
+  animation: fadeInAnimation ease-in-out 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  text-decoration: none;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+    bottom: 20%;
+    right: 15%;
+  }
+  100% {
+    opacity: 1;
+    right: 15%;
+    bottom: 30%;
+  }
+}
 .index-main {
   margin: 0 8.33%;
 }
@@ -450,6 +494,11 @@ a {
   justify-content: center;
 }
 
+@media screen and (max-width: 670px) {
+  .details {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 .login {
   display: flex;
   justify-content: space-around;
